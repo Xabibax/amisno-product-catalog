@@ -96,7 +96,7 @@ public class Phone   {
      * Get name
      * @return name
      **/
-    @ApiModelProperty(example = "doggie", required = true, value = "")
+    @ApiModelProperty(example = "iPhone12", required = true, value = "")
     @NotNull
 
 
@@ -116,7 +116,7 @@ public class Phone   {
      * Get price
      * @return price
      **/
-    @ApiModelProperty(example = "1.1", required = true, value = "")
+    @ApiModelProperty(example = "793.97", required = true, value = "")
     @NotNull
 
 
@@ -137,7 +137,7 @@ public class Phone   {
      * Get img
      * @return img
      **/
-    @ApiModelProperty(example = "http://ww.lol.fr/", required = true, value = "")
+    @ApiModelProperty(example = "https://encrypted-tbn3.gstatic.com/shopping?q=tbn:ANd9GcQI5f1oCs5beJGKgcb2ya_zVYz4hyDDdVIrQXRxFv9LUmF1eT-UBw&usqp=CAc", required = false, value = "")
 
 
     public String getImg() {
@@ -157,7 +157,7 @@ public class Phone   {
      * phone status in the store
      * @return status
      **/
-    @ApiModelProperty(value = "phone status in the store")
+    @ApiModelProperty(example = "available", value = "phone status in the store")
 
 
     public StatusEnum getStatus() {

@@ -14,7 +14,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableSwagger2
 @EnableEurekaClient
 @EnableMongoRepositories(basePackages = { "io.swagger.repository" })
-@ComponentScan(basePackages = { "io.swagger", "io.swagger.api" , "io.swagger.configuration"})
+@ComponentScan(basePackages = { "io.swagger", "io.swagger.api", "io.swagger.configuration"})
 public class Swagger2SpringBoot implements CommandLineRunner {
 
     @Override
