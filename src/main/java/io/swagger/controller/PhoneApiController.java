@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.validation.Valid;
+import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-10-18T10:50:13.013Z")
 
@@ -62,6 +63,13 @@ public class PhoneApiController implements PhoneApi {
         if (phone != null)
             return new ResponseEntity<Phone>(phoneService.deletePhone(phoneId), HttpStatus.OK);
         return new ResponseEntity<Phone>(HttpStatus.NOT_FOUND);
+    }
+
+    @Override
+    public ResponseEntity<List<Phone>> listPhones() {
+        String accept = request.getHeader("Accept");
+        List<Phone> phones = phoneService.listPhones();
+        return new ResponseEntity<List<Phone>>(phones, HttpStatus.OK);
     }
 
 

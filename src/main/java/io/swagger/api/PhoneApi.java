@@ -11,11 +11,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-10-18T10:50:13.013Z")
 
 @Api(value = "phone", description = "the phone API")
 @RequestMapping(value = "/v2")
+@CrossOrigin(origins = "*")
 public interface PhoneApi {
 
     @ApiOperation(value = "Add a new phone to the store", nickname = "addPhone", notes = "", tags = {"phone",})
@@ -36,6 +38,15 @@ public interface PhoneApi {
             produces = {"application/xml", "application/json"},
             method = RequestMethod.DELETE)
     ResponseEntity<Phone> deletePhone(@ApiParam(value = "Phone id to delete", required = true) @PathVariable("phoneId") Long phoneId, @ApiParam(value = "") @RequestHeader(value = "api_key", required = false) String apiKey);
+
+
+    @ApiOperation(value = "Get all phones", nickname = "listPhone", notes = "Returns all phone", response = Phone.class, tags = {"phone",})
+    @ApiResponses(value = {
+            @ApiResponse(code = 200, message = "successful operation", response = Phone.class),})
+    @RequestMapping(value = "/phone",
+            produces = {"application/xml", "application/json"},
+            method = RequestMethod.GET)
+    ResponseEntity<List<Phone>> listPhones();
 
 
     @ApiOperation(value = "Find phone by ID", nickname = "getPhoneById", notes = "Returns a single phone", response = Phone.class, tags = {"phone",})
