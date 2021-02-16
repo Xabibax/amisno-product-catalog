@@ -1,0 +1,33 @@
+apply plugin: 'java'
+apply plugin: 'maven'
+
+group = 'io.swagger'
+version = '1.0.0'
+
+description = """swagger-spring"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+    jcenter()
+    maven { url "https://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-tomcat', version: springBootVersion
+    compile group: 'io.springfox', name: 'springfox-boot-starter', version: springFoxVersion
+    compile group: 'io.springfox', name: 'springfox-oas', version: springFoxVersion
+    compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springFoxVersion
+    compile group: 'com.github.joschi.jackson', name: 'jackson-datatype-threetenbp', version: '2.6.4'
+    compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
+    compile group: 'org.springframework.plugin', name: 'spring-plugin-core', version: '2.0.0.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator',version: springBootVersion
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: springBootVersion
+    compile group: 'io.github.resilience4j', name: 'resilience4j-circuitbreaker', version: resilience4jVersion
+//    testcompile "group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: ${springBootVersion}"
+}
