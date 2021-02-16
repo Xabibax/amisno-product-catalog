@@ -3,17 +3,30 @@ package io.swagger.configuration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
-import springfox.documentation.builders.ApiInfoBuilder;
-import springfox.documentation.builders.RequestHandlerSelectors;
-import springfox.documentation.service.ApiInfo;
 import springfox.documentation.service.Contact;
 import springfox.documentation.spi.DocumentationType;
 import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.builders.RequestHandlerSelectors;
+import springfox.documentation.builders.ApiInfoBuilder;
+import springfox.documentation.service.ApiInfo;
+import io.swagger.v3.oas.models.OpenAPI;
+import io.swagger.v3.oas.models.info.Info;
+import io.swagger.v3.oas.models.info.License;
 
-@javax.annotation.Generated(value = "io.swagger.codegen.languages.SpringCodegen", date = "2020-10-18T10:50:13.013Z")
-
+@javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-16T11:09:14.251Z[GMT]")
 @Configuration
 public class SwaggerDocumentationConfig {
+
+    @Bean
+    public Docket customImplementation(){
+        return new Docket(DocumentationType.OAS_30)
+                .select()
+                    .apis(RequestHandlerSelectors.basePackage("io.swagger.api"))
+                    .build()
+                .directModelSubstitute(org.threeten.bp.LocalDate.class, java.sql.Date.class)
+                .directModelSubstitute(org.threeten.bp.OffsetDateTime.class, java.util.Date.class)
+                .apiInfo(apiInfo());
+    }
 
     ApiInfo apiInfo() {
         return new ApiInfoBuilder()
@@ -28,14 +41,18 @@ public class SwaggerDocumentationConfig {
     }
 
     @Bean
-    public Docket customImplementation(){
-        return new Docket(DocumentationType.SWAGGER_2)
-                .select()
-                    .apis(RequestHandlerSelectors.basePackage("io.swagger.controller"))
-                    .build()
-                .directModelSubstitute(org.threeten.bp.LocalDate.class, java.sql.Date.class)
-                .directModelSubstitute(org.threeten.bp.OffsetDateTime.class, java.util.Date.class)
-                .apiInfo(apiInfo());
+    public OpenAPI openApi() {
+        return new OpenAPI()
+            .info(new Info()
+                .title("Product Catalog")
+                .description("This is a Mockup Product Catalog Service for the Amisno project")
+                .termsOfService("")
+                .version("1.0.0")
+                .license(new License()
+                    .name("Apache 2.0")
+                    .url("http://www.apache.org/licenses/LICENSE-2.0.html"))
+                .contact(new io.swagger.v3.oas.models.info.Contact()
+                    .email("xavier.aleman@imt-atlantique.net")));
     }
 
 }
