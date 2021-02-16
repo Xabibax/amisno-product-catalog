@@ -55,7 +55,6 @@ public class V2ApiController implements V2Api {
         this.request = request;
     }
 
-
     public ResponseEntity<Phone> addPhone(@Parameter(in = ParameterIn.DEFAULT, description = "Phone object that needs to be added to the store", required=true, schema=@Schema()) @Valid @RequestBody Phone body) {
         String accept = request.getHeader("Accept");
         Phone res = phoneService.getPhone(body.getId());

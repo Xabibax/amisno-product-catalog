@@ -4,7 +4,7 @@ apply plugin: 'maven'
 group = 'io.swagger'
 version = '1.0.0'
 
-description = """swagger-spring"""
+description = """product-catalog"""
 
 sourceCompatibility = 1.8
 targetCompatibility = 1.8
@@ -24,10 +24,20 @@ dependencies {
     compile group: 'io.springfox', name: 'springfox-swagger-ui', version: springFoxVersion
     compile group: 'com.github.joschi.jackson', name: 'jackson-datatype-threetenbp', version: '2.6.4'
     compile group: 'javax.validation', name: 'validation-api', version: '2.0.1.Final'
-    compile group: 'org.springframework.plugin', name: 'spring-plugin-core', version: '2.0.0.RELEASE'
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-data-mongodb', version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-actuator',version: springBootVersion
     compile group: 'org.springframework.boot', name: 'spring-boot-starter-aop', version: springBootVersion
-    compile group: 'io.github.resilience4j', name: 'resilience4j-circuitbreaker', version: resilience4jVersion
+    compile "io.github.resilience4j:resilience4j-spring-boot2:${resilience4jVersion}"
+    compile("io.github.resilience4j:resilience4j-all:${resilience4jVersion}") // Optional, only required when you want to use the Decorators class
+    compile("io.github.resilience4j:resilience4j-reactor:${resilience4jVersion}")
+
+    /*
+    compile "io.github.resilience4j:resilience4j-circuitbreaker:${resilience4jVersion}"
+    compile "io.github.resilience4j:resilience4j-ratelimiter:${resilience4jVersion}"
+    compile "io.github.resilience4j:resilience4j-retry:${resilience4jVersion}"
+    compile "io.github.resilience4j:resilience4j-bulkhead:${resilience4jVersion}"
+    compile "io.github.resilience4j:resilience4j-cache:${resilience4jVersion}"
+    compile "io.github.resilience4j:resilience4j-timelimiter:${resilience4jVersion}"
+    /**/
 //    testcompile "group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: ${springBootVersion}"
 }

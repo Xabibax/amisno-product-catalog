@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import io.swagger.model.Phone;
 import io.swagger.repository.PhoneRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+
 
 @Service
 public class PhoneServiceImpl implements PhoneService {
 
     @Autowired
     private PhoneRepository phoneRepository;
+
+    private static final String BACKEND_A= "backendA";
 
     private Phone findOne(Long Id) {
         Phone instance = null;
@@ -35,6 +39,7 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
+    @CircuitBreaker(name = BACKEND_A)
     public List<Phone> listPhones() {
         return phoneRepository.findAll();
     }
