@@ -103,7 +103,7 @@ public interface V2Api {
     @RequestMapping(value = "/v2/phone",
         produces = { "application/xml", "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<Phone> listPhone();
+    ResponseEntity<List<Phone>> listPhones();
 
 
     @Operation(summary = "Update an existing phone", description = "", tags={ "phone" })
