@@ -15,8 +15,9 @@ public class PhoneServiceImpl implements PhoneService {
     @Autowired
     private PhoneRepository phoneRepository;
 
-    private static final String BACKEND_A= "backendA";
+    private static final String productCatalog= "productCatalog";
 
+    @CircuitBreaker(name = productCatalog)
     private Phone findOne(Long Id) {
         Phone instance = null;
         try {
@@ -34,17 +35,19 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
     public Phone createPhone(Phone phone) {
         return phoneRepository.save(phone);
     }
 
     @Override
-    @CircuitBreaker(name = BACKEND_A)
+    @CircuitBreaker(name = productCatalog)
     public List<Phone> listPhones() {
         return phoneRepository.findAll();
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
     public Phone updatePhone(Long id, Phone phone) {
 //        Phone updateInstance = this.findOne(id);
 //        updateInstance.setName(phone.getName());
@@ -52,6 +55,7 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
     public Phone deletePhone(Long id) {
         Phone instance = findOne(id);
         phoneRepository.delete(instance);
@@ -59,6 +63,7 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
     public Phone getPhone(Long id) {//return phoneRepository.findById(id).get();
         return this.findOne(id);
     }

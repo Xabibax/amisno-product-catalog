@@ -14,6 +14,7 @@ tasks.withType(JavaCompile) {
 
 repositories {
     jcenter()
+    mavenCentral()
     maven { url "https://repo.maven.apache.org/maven2" }
 }
 dependencies {
@@ -38,6 +39,15 @@ dependencies {
     compile "io.github.resilience4j:resilience4j-bulkhead:${resilience4jVersion}"
     compile "io.github.resilience4j:resilience4j-cache:${resilience4jVersion}"
     compile "io.github.resilience4j:resilience4j-timelimiter:${resilience4jVersion}"
+    /**/
+
+    /* For monitoring resilience4j */
+
+
+    compile 'io.micrometer:micrometer-registry-prometheus:latest.release'
+
+
+
     /**/
 //    testcompile "group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: ${springBootVersion}"
 }

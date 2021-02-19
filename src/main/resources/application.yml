@@ -35,7 +35,19 @@ spring:
     serialization.WRITE_DATES_AS_TIMESTAMPS: false
 springfox.documentation.open-api.v3.path: /api-docs
 resilience4j.circuitbreaker:
-  instances:
-    backendA:
+  configs:
+    default:
       registerHealthIndicator: true
-      slidingWindowSize: 100
+      minimumNumberOfCalls: 5
+      permittedNumberOfCallsInHalfOpenState: 3
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 5s
+      failureRateThreshold: 50
+      eventConsumerBufferSize: 10
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+  instances:
+    productCatalog:
+      baseConfig: default
