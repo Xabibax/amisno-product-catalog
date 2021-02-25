@@ -1,7 +1,8 @@
 
 
 management:
-  endpoints.web.exposure.include: '*'
+  #endpoints.web.exposure.include: [ "metrics", "prometheus", "circuitbreakers", "circuitbreakerevents" ]
+  endpoints.web.exposure.include: [ "*" ]
   endpoint.health.show-details: always
   health.diskspace.enabled: false
   circuitbreakers.enabled: true
@@ -13,14 +14,13 @@ management:
         http.server.requests: true
         resilience4j.circuitbreaker.calls: true
 
-
 info:
   name: ${spring.application.name}
   description: product catalog service for amisno
   environment: ${spring.profiles.active}
   version: 0.0.1
 
-eureka.client.serviceUrl.defaultZone: http://localhost:9101/eureka
+eureka.client.serviceUrl.defaultZone: http://amisno-infra-eureka:9103/eureka/
 server.port: 8090
 spring:
   data:

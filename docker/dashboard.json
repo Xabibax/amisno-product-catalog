@@ -399,8 +399,8 @@
       "scopedVars": {
         "circuitbreaker_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "title": "CircuitBreaker",
@@ -465,8 +465,8 @@
       "scopedVars": {
         "circuitbreaker_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "sparkline": {
@@ -549,8 +549,8 @@
       "scopedVars": {
         "circuitbreaker_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "seriesOverrides": [],
@@ -658,8 +658,8 @@
       "scopedVars": {
         "circuitbreaker_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "seriesOverrides": [],
@@ -761,8 +761,8 @@
       "scopedVars": {
         "circuitbreaker_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "seriesOverrides": [],
@@ -882,8 +882,8 @@
       "scopedVars": {
         "circuitbreaker_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "seriesOverrides": [],
@@ -961,8 +961,8 @@
       "scopedVars": {
         "retry_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "title": "Retry",
@@ -1009,8 +1009,8 @@
       "scopedVars": {
         "retry_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "seriesOverrides": [],
@@ -1081,8 +1081,8 @@
       "scopedVars": {
         "bulkhead_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "title": "Bulkhead",
@@ -1124,8 +1124,8 @@
       "scopedVars": {
         "bulkhead_name": {
           "selected": true,
-          "text": "backendA",
-          "value": "backendA"
+          "text": "productCatalog",
+          "value": "productCatalog"
         }
       },
       "seriesOverrides": [],
