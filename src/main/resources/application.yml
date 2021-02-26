@@ -38,12 +38,12 @@ resilience4j.circuitbreaker:
   configs:
     default:
       registerHealthIndicator: true
-      minimumNumberOfCalls: 5
-      permittedNumberOfCallsInHalfOpenState: 3
+      minimumNumberOfCalls: 3
+      permittedNumberOfCallsInHalfOpenState: 1
       automaticTransitionFromOpenToHalfOpenEnabled: true
-      waitDurationInOpenState: 5s
-      failureRateThreshold: 50
-      eventConsumerBufferSize: 10
+      waitDurationInOpenState: 50s
+      failureRateThreshold: 20
+      eventConsumerBufferSize: 1
       recordExceptions:
         - org.springframework.web.client.HttpServerErrorException
         - java.util.concurrent.TimeoutException

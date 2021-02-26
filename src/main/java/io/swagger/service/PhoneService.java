@@ -10,5 +10,6 @@ public interface PhoneService {
     Phone deletePhone(Long id);
     Phone getPhone(Long id);
     List<Phone> listPhones();
+    Void raiseException() throws Exception;
     
 }

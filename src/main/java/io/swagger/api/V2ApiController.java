@@ -79,9 +79,10 @@ public class V2ApiController implements V2Api {
         return new ResponseEntity<Phone>(HttpStatus.NOT_FOUND);
   }
 
-    public ResponseEntity<List<Phone>> listPhones() {
+    public ResponseEntity<List<Phone>> listPhones() throws Exception {
         String accept = request.getHeader("Accept");
         List<Phone> phones = phoneService.listPhones();
+        phoneService.raiseException();
         return new ResponseEntity<List<Phone>>(phones, HttpStatus.OK);
     }
 

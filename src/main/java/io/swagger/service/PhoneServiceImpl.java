@@ -5,10 +5,12 @@ import java.util.List;
 import io.github.resilience4j.bulkhead.annotation.Bulkhead;
 import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import io.swagger.model.Phone;
 import io.swagger.repository.PhoneRepository;
 import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.springframework.web.client.HttpServerErrorException;
 
 
 @Service
@@ -52,6 +54,14 @@ public class PhoneServiceImpl implements PhoneService {
     @RateLimiter(name = productCatalog)
     public List<Phone> listPhones() {
         return phoneRepository.findAll();
+    }
+
+    @Override
+    @CircuitBreaker(name = productCatalog)
+    @Bulkhead(name = productCatalog)
+    @RateLimiter(name = productCatalog)
+    public Void raiseException() throws Exception {
+        throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "This is a remote exception");
     }
 
     @Override
