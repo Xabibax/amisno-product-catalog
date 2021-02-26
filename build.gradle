@@ -65,8 +65,17 @@ dependencies {
     implementation "io.github.resilience4j:resilience4j-timelimiter:${resilience4jVersion}"
     /**/
 
+
     /* For monitoring resilience4j */
     implementation 'io.micrometer:micrometer-registry-prometheus:latest.release'
     /**/
 //    testimplementation "group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: ${springBootVersion}"
+}
+
+jar {
+    manifest {
+        attributes(
+                "Main-Class": "io.swagger.Swagger2SpringBoot",
+                "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
+    }
 }

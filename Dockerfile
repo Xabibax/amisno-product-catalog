@@ -19,12 +19,9 @@ FROM openjdk:8-jre-slim
 WORKDIR /app
 
 COPY --from=build /home/gradle/build/libs /app/build/libs
-COPY --from=build /home/gradle/gradle /app/gradle
-COPY --from=build /home/gradle/gradlew /app
 
-RUN ./gradlew jar
-RUN ls -R
+RUN ls -r build/libs
 
 EXPOSE 8090
-ENTRYPOINT ["./gradlew", "run" ]
+ENTRYPOINT ["java", "-jar", "build/libs/gradle-1.0.0.jar" ]
 
