@@ -25,11 +25,11 @@ server.port: 8090
 spring:
   data:
     mongodb:
-      database: amisno
+      database: admin
       host: localhost
-      password: amisno
+      password: toor
       port: 27017
-      username: amisno
+      username: root
   jackson:
     date-format: io.swagger.RFC3339DateFormat
     serialization.WRITE_DATES_AS_TIMESTAMPS: false
@@ -41,7 +41,7 @@ resilience4j.circuitbreaker:
       minimumNumberOfCalls: 3
       permittedNumberOfCallsInHalfOpenState: 1
       automaticTransitionFromOpenToHalfOpenEnabled: true
-      waitDurationInOpenState: 50s
+      waitDurationInOpenState: 10s
       failureRateThreshold: 20
       eventConsumerBufferSize: 1
       recordExceptions:

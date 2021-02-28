@@ -60,7 +60,7 @@ public class PhoneServiceImpl implements PhoneService {
     @CircuitBreaker(name = productCatalog)
     @Bulkhead(name = productCatalog)
     @RateLimiter(name = productCatalog)
-    public Void raiseException() throws Exception {
+    public Void raiseError() throws Exception {
         throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "This is a remote exception");
     }
 

@@ -10,7 +10,7 @@ services:
     networks:
       - net
     depends_on:
-      - app
+      - product-catalog
   grafana:
     image: grafana/grafana
     container_name: grafana
@@ -20,11 +20,11 @@ services:
       - "3000:3000"
     networks:
       - net
-  app:
+  product-catalog:
   # build and start spring application inside a separate container using the same network as prometheus
     build: .
     ports:
-      - "9080:9080"
+      - "8090:8090"
     networks:
       - net
 networks:

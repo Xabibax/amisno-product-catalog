@@ -16,7 +16,6 @@ apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven'
 
 apply plugin: 'application'
-mainClassName = 'io.swagger.Swagger2SpringBoot'
 
 group = 'io.swagger'
 version = '1.0.0'
@@ -71,11 +70,14 @@ dependencies {
     /**/
 //    testimplementation "group: 'org.springframework.boot', name: 'spring-boot-starter-test', version: ${springBootVersion}"
 }
-
-jar {
-    manifest {
-        attributes(
-                "Main-Class": "io.swagger.Swagger2SpringBoot",
-                "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
-    }
+bootJar {
+    mainClass = 'io.swagger.Swagger2SpringBoot'
+    archiveFileName = "${rootProject.name}-${project.version}.jar"
 }
+//jar {
+//    manifest {
+//        attributes(
+//                "Main-Class": "io.swagger.Swagger2SpringBoot",
+//                "Class-Path": configurations.compile.collect { it.getName() }.join(' '))
+//    }
+//}

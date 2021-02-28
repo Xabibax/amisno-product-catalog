@@ -11,26 +11,17 @@ import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
-import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
-import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RequestPart;
-import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.bind.annotation.CookieValue;
 
 import javax.validation.Valid;
-import javax.validation.constraints.*;
 import java.util.List;
-import java.util.Map;
 
 @javax.annotation.Generated(value = "io.swagger.codegen.v3.generators.java.SpringCodegen", date = "2021-02-16T11:09:14.251Z[GMT]")
 public interface V2Api {
@@ -103,7 +94,7 @@ public interface V2Api {
     @RequestMapping(value = "/v2/phone",
         produces = { "application/xml", "application/json" }, 
         method = RequestMethod.GET)
-    ResponseEntity<List<Phone>> listPhones() throws Exception;
+    ResponseEntity<List<Phone>> listPhones();
 
 
     @Operation(summary = "Update an existing phone", description = "", tags={ "phone" })
@@ -128,24 +119,18 @@ public interface V2Api {
     ResponseEntity<Phone> updatePhone(@Parameter(in = ParameterIn.DEFAULT, description = "Phone object that needs to be added to the store", required=true, schema=@Schema()) @Valid @RequestBody Phone body);
 
 
-    @Operation(summary = "Updates a phone in the store with form data", description = "", tags={ "phone" })
-    @ApiResponses(value = { 
-        @ApiResponse(responseCode = "200", description = "OK", content = @Content(schema = @Schema(implementation = Phone.class))),
-        
-        @ApiResponse(responseCode = "201", description = "Created"),
-        
-        @ApiResponse(responseCode = "401", description = "Unauthorized"),
-        
-        @ApiResponse(responseCode = "403", description = "Forbidden"),
-        
-        @ApiResponse(responseCode = "404", description = "Not Found"),
-        
-        @ApiResponse(responseCode = "405", description = "Invalid input") })
-    @RequestMapping(value = "/v2/phone/{phoneId}",
-        produces = { "application/xml", "application/json" }, 
-        consumes = { "application/x-www-form-urlencoded" }, 
-        method = RequestMethod.POST)
-    ResponseEntity<Phone> updatePhoneWithForm(@Parameter(in = ParameterIn.PATH, description = "ID of phone that needs to be updated", required=true, schema=@Schema()) @PathVariable("phoneId") Long phoneId);
+    @Operation(summary = "Raise error", description = "Raise error", tags={ "raiseError" })
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "successful operation", content = @Content(schema = @Schema(implementation = Phone.class))),
 
+            @ApiResponse(responseCode = "401", description = "Unauthorized"),
+
+            @ApiResponse(responseCode = "403", description = "Forbidden"),
+
+            @ApiResponse(responseCode = "404", description = "Not Found") })
+    @RequestMapping(value = "/v2/raiseError",
+            produces = { "application/xml", "application/json" },
+            method = RequestMethod.GET)
+    void raiseError() throws Exception;
 }
 
