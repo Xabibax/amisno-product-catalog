@@ -2,3 +2,7 @@
 /.settings/
 /.idea/
 /.vscode/
+
+catalog-service.iml
+/build/
+/.gradle/

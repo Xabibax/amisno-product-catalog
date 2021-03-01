@@ -2,10 +2,16 @@ package io.swagger.service;
 
 import java.util.List;
 
+import io.github.resilience4j.bulkhead.annotation.Bulkhead;
+import io.github.resilience4j.ratelimiter.annotation.RateLimiter;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import io.swagger.model.Phone;
 import io.swagger.repository.PhoneRepository;
+import io.github.resilience4j.circuitbreaker.annotation.CircuitBreaker;
+import org.springframework.web.client.HttpServerErrorException;
+
 
 @Service
 public class PhoneServiceImpl implements PhoneService {
@@ -13,6 +19,11 @@ public class PhoneServiceImpl implements PhoneService {
     @Autowired
     private PhoneRepository phoneRepository;
 
+    private static final String productCatalog= "productCatalog";
+
+    @CircuitBreaker(name = productCatalog)
+    @Bulkhead(name = productCatalog)
+    @RateLimiter(name = productCatalog)
     private Phone findOne(Long Id) {
         Phone instance = null;
         try {
@@ -30,16 +41,33 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
+    @Bulkhead(name = productCatalog)
+    @RateLimiter(name = productCatalog)
     public Phone createPhone(Phone phone) {
         return phoneRepository.save(phone);
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
+    @Bulkhead(name = productCatalog)
+    @RateLimiter(name = productCatalog)
     public List<Phone> listPhones() {
         return phoneRepository.findAll();
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
+    @Bulkhead(name = productCatalog)
+    @RateLimiter(name = productCatalog)
+    public Void raiseError() throws Exception {
+        throw new HttpServerErrorException(HttpStatus.INTERNAL_SERVER_ERROR, "This is a remote exception");
+    }
+
+    @Override
+    @CircuitBreaker(name = productCatalog)
+    @Bulkhead(name = productCatalog)
+    @RateLimiter(name = productCatalog)
     public Phone updatePhone(Long id, Phone phone) {
 //        Phone updateInstance = this.findOne(id);
 //        updateInstance.setName(phone.getName());
@@ -47,6 +75,9 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
+    @Bulkhead(name = productCatalog)
+    @RateLimiter(name = productCatalog)
     public Phone deletePhone(Long id) {
         Phone instance = findOne(id);
         phoneRepository.delete(instance);
@@ -54,6 +85,9 @@ public class PhoneServiceImpl implements PhoneService {
     }
 
     @Override
+    @CircuitBreaker(name = productCatalog)
+    @Bulkhead(name = productCatalog)
+    @RateLimiter(name = productCatalog)
     public Phone getPhone(Long id) {//return phoneRepository.findById(id).get();
         return this.findOne(id);
     }

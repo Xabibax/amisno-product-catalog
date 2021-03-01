@@ -1,0 +1,55 @@
+
+
+management:
+  #endpoints.web.exposure.include: [ "metrics", "prometheus", "circuitbreakers", "circuitbreakerevents" ]
+  endpoints.web.exposure.include: [ "*" ]
+  endpoint.health.show-details: always
+  health.diskspace.enabled: false
+  circuitbreakers.enabled: true
+  ratelimiters.enabled: false
+  metrics:
+    tags:.application: ${spring.application.name}
+    distribution:
+      percentiles-histogram:
+        http.server.requests: true
+        resilience4j.circuitbreaker.calls: true
+
+info:
+  name: ${spring.application.name}
+  description: product catalog service for amisno
+  environment: ${spring.profiles.active}
+  version: 0.0.1
+
+eureka.client.serviceUrl.defaultZone: http://amisno-infra-eureka:9103/eureka/
+server.port: 8090
+spring:
+  application:
+    name: catalog-service
+  data:
+    mongodb:
+      database: admin
+      host: localhost
+      password: toor
+      port: 27017
+      username: root
+  jackson:
+    date-format: io.swagger.RFC3339DateFormat
+    serialization.WRITE_DATES_AS_TIMESTAMPS: false
+springfox.documentation.open-api.v3.path: /api-docs
+resilience4j.circuitbreaker:
+  configs:
+    default:
+      registerHealthIndicator: true
+      minimumNumberOfCalls: 3
+      permittedNumberOfCallsInHalfOpenState: 1
+      automaticTransitionFromOpenToHalfOpenEnabled: true
+      waitDurationInOpenState: 10s
+      failureRateThreshold: 20
+      eventConsumerBufferSize: 1
+      recordExceptions:
+        - org.springframework.web.client.HttpServerErrorException
+        - java.util.concurrent.TimeoutException
+        - java.io.IOException
+  instances:
+    productCatalog:
+      baseConfig: default

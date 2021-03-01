@@ -2,16 +2,26 @@
 #
 # Build
 #
-FROM maven:3.6.3-openjdk-8 AS build
+FROM gradle:6.8.2-jdk8 AS BUILD
 
-COPY src /home/app/src
-COPY pom.xml /home/app
-RUN mvn -f /home/app/pom.xml clean package
+COPY --chown=gradle:gradle src /home/gradle/src
+COPY --chown=gradle:gradle build.gradle /home/gradle
+COPY --chown=gradle:gradle gradle.properties /home/gradle
+COPY --chown=gradle:gradle settings.gradle /home/gradle
+
+RUN gradle bootJar --no-daemon
 
 #
 # Package stage
 #
-FROM openjdk:8-jre-slim
-COPY --from=build /home/app/target/catalog-service-1.0.0.jar /usr/local/lib/app.jar
+FROM openjdk:8-jre-slim AS PRODUCT_JAR
+
+WORKDIR /app
+
+COPY --from=build /home/gradle/build/libs /app/build/libs
+
+RUN ls -r build/libs
+
 EXPOSE 8090
-ENTRYPOINT ["java","-jar","/usr/local/lib/app.jar"]
+ENTRYPOINT ["java", "-jar", "build/libs/product-catalog-1.0.0.jar" ]
+

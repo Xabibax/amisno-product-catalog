@@ -1,0 +1,68 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus
+    container_name: prometheus
+    network_mode: "host"
+    expose:
+      - 9090
+    volumes:
+      - ./docker/prometheus.yml:/etc/prometheus/prometheus.yml
+  grafana:
+    image: grafana/grafana
+    container_name: grafana
+    network_mode: "host"
+    expose:
+      - 3000
+    env_file:
+      - ./docker/grafana.env
+  mongo:
+    image: mongo
+    restart: always
+    network_mode: "host"
+    expose:
+      - 27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: toor
+      MONGO_INITDB_DATABASE: admin
+    volumes:
+      - ./mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+  amisno-config-server:
+    image: fourmipanda/amisno-config-server:latest
+    network_mode: "host"
+    expose:
+      - 9101
+    healthcheck:
+      test: curl -v --silent http://localhost:9101/actuator/health 2>&1 | grep UP
+      timeout: 5s
+      interval: 5s
+      retries: 10
+  amisno-infra-eureka:
+    image: fourmipanda/amisno-infra-eureka:latest
+    network_mode: "host"
+    expose:
+      - 9103
+    healthcheck:
+      test: curl -v --silent http://localhost:9103/actuator/health 2>&1 | grep UP
+      timeout: 5s
+      interval: 5s
+      retries: 10
+    depends_on:
+      amisno-config-server:
+        condition: service_healthy
+  amisno-cloud-gateway:
+    image: fourmipanda/amisno-cloud-gateway:latest
+    network_mode: "host"
+    expose:
+      - 9102
+    healthcheck:
+      test: curl -v --silent http://localhost:9102/actuator/health 2>&1 | grep UP
+      timeout: 5s
+      interval: 5s
+      retries: 10
+    depends_on:
+      amisno-infra-eureka:
+        condition: service_healthy
+      amisno-config-server:
+        condition: service_healthy
